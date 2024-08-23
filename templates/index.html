@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SalarySavvy</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f0f2f5;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            scroll-behavior: smooth;
+        }
+        .navbar {
+            background-color: #343a40;
+            padding: 15px;
+        }
+        .navbar-brand {
+            font-size: 1.8rem;
+        }
+        .nav-link {
+            color: #ffffff !important;
+            font-size: 1.1rem;
+        }
+        .nav-link:hover {
+            color: #dcdcdc !important;
+        }
+        .hero {
+            background: url('/static/bg1.jpeg') no-repeat center center;
+            background-size: cover;
+            color: white;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            animation: fadeIn 2s ease-out;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4); /* Overlay color */
+            z-index: 1;
+        }
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            font-weight: bold;
+            position: relative;
+            z-index: 2;
+        }
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 2;
+        }
+        .hero .btn {
+            font-size: 1.1rem;
+            padding: 10px 30px;
+            border-radius: 50px;
+            position: relative;
+            z-index: 2;
+        }
+        .section {
+            padding: 80px 0;
+            animation: slideIn 2s ease-out;
+        }
+        .section h2 {
+            margin-bottom: 30px;
+            font-size: 2.5rem;
+            font-weight: bold;
+            text-align: center;
+        }
+        .section p {
+            font-size: 1.2rem;
+            text-align: center;
+            max-width: 800px;
+            margin: auto;
+        }
+        .form-section {
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .form-section .btn-primary {
+            font-size: 1.2rem;
+            padding: 12px 20px;
+            border-radius: 30px;
+        }
+        .footer {
+            background-color: #343a40;
+            color: #ffffff;
+            padding: 20px 0;
+            text-align: center;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+            box-shadow: 0 -2px 4px rgba(0,0,0,0.1);
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes slideIn {
+            from { transform: translateY(30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <a class="navbar-brand" href="#">SalarySavvy</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#home">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#about">About Us</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#form">Get Started</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#contact">Contact Us</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero" id="home">
+        <div>
+            <h1>Welcome to Salary Savvy</h1>
+            <p>Discover your potential salary based on your experience, education, and job role.</p>
+            <a href="#form" class="btn btn-light">Get Started</a>
+        </div>
+    </header>
+
+    <!-- About Us Section -->
+    <section class="section" id="about">
+        <div class="container">
+            <h2>About Us</h2>
+            <p>We provide precise salary predictions using advanced machine learning models. Our aim is to help you make informed decisions about your career by analyzing various factors that affect your potential earnings.</p>
+        </div>
+    </section>
+
+    <!-- Salary Prediction Form Section -->
+    <section class="section" id="form">
+        <div class="container form-section">
+            <h2 class="text-center">Salary Prediction Form</h2>
+            <form action="/predict" method="post">
+                <div class="form-group">
+                    <label for="age">Age:</label>
+                    <input type="number" class="form-control" id="age" name="age" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="gender">Gender:</label>
+                    <select class="form-control" id="gender" name="gender" required>
+                        <option value="" disabled selected>Select Gender</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="education_level">Education Level:</label>
+                    <select class="form-control" id="education_level" name="education_level" required>
+                        <option value="" disabled selected>Select Education Level</option>
+                        <option value="High School">High School</option>
+                        <option value="Bachelors">Bachelors</option>
+                        <option value="Masters">Masters</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="year_of_experience">Years of Experience:</label>
+                    <input type="number" class="form-control" id="year_of_experience" name="year_of_experience" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="job_role">Job Role:</label>
+                    <select class="form-control" id="job_role" name="job_role" required>
+                        <option value="" disabled selected>Select Job Role</option>
+                        <option value="Content Marketing Manager">Content Marketing Manager</option>
+                        <option value="Data Analyst">Data Analyst</option>
+                        <option value="Data Scientist">Data Scientist</option>
+                        <option value="Digital Marketing Manager">Digital Marketing Manager</option>
+                        <option value="Director of Data Science">Director of Data Science</option>
+                        <option value="Director of HR">Director of HR</option>
+                        <option value="Director of Marketing">Director of Marketing</option>
+                        <option value="Financial Analyst">Financial Analyst</option>
+                        <option value="Financial Manager">Financial Manager</option>
+                        <option value="Front End Developer">Front End Developer</option>
+                        <option value="Full Stack Engineer">Full Stack Engineer</option>
+                        <option value="Human Resources Coordinator">Human Resources Coordinator</option>
+                        <option value="Human Resources Manager">Human Resources Manager</option>
+                        <option value="Junior HR Coordinator">Junior HR Coordinator</option>
+                        <option value="Junior HR Generalist">Junior HR Generalist</option>
+                        <option value="Junior Marketing Manager">Junior Marketing Manager</option>
+                        <option value="Junior Sales Associate">Junior Sales Associate</option>
+                        <option value="Junior Sales Representative">Junior Sales Representative</option>
+                        <option value="Junior Software Developer">Junior Software Developer</option>
+                        <option value="Junior Software Engineer">Junior Software Engineer</option>
+                        <option value="Junior Web Developer">Junior Web Developer</option>
+                        <option value="Marketing Analyst">Marketing Analyst</option>
+                        <option value="Marketing Coordinator">Marketing Coordinator</option>
+                        <option value="Marketing Director">Marketing Director</option>
+                        <option value="Marketing Manager">Marketing Manager</option>
+                        <option value="Operations Manager">Operations Manager</option>
+                        <option value="Product Designer">Product Designer</option>
+                        <option value="Product Manager">Product Manager</option>
+                        <option value="Receptionist">Receptionist</option>
+                        <option value="Research Director">Research Director</option>
+                        <option value="Research Scientist">Research Scientist</option>
+                        <option value="Sales Associate">Sales Associate</option>
+                        <option value="Sales Director">Sales Director</option>
+                        <option value="Sales Executive">Sales Executive</option>
+                        <option value="Sales Manager">Sales Manager</option>
+                        <option value="Sales Representative">Sales Representative</option>
+                        <option value="Senior Data Scientist">Senior Data Scientist</option>
+                        <option value="Senior HR Generalist">Senior HR Generalist</option>
+                        <option value="Senior Human Resources Manager">Senior Human Resources Manager</option>
+                        <option value="Senior Product Marketing Manager">Senior Product Marketing Manager</option>
+                        <option value="Senior Project Engineer">Senior Project Engineer</option>
+                        <option value="Senior Research Scientist">Senior Research Scientist</option>
+                        <option value="Senior Software Engineer">Senior Software Engineer</option>
+                        <option value="Software Developer">Software Developer</option>
+                        <option value="Software Engineer">Software Engineer</option>
+                        <option value="Software Engineer Manager">Software Engineer Manager</option>
+                        <option value="Web Developer">Web Developer</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Predict Salary</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Contact Us Section -->
+    <section class="section" id="contact">
+        <div class="container">
+            <h2>Contact Us</h2>
+            <p>If you have any questions or need support, feel free to reach out to us.</p>
+            <p>Email: support@SalarySavvy.com</p>
+            <p>Phone: (123) 456-7890</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2024 SalarySavvy. All rights reserved.</p>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
